@@ -12,9 +12,10 @@ var DB *gorm.DB
 
 func InitDatabase() error {
 	env := envs.ServerEnvs
-	uri := fmt.Sprintf("host=%s user=%s password=%s dbname=%s port=%s sslmode=%s", env.POSTGRES_HOST, env.POSTGRES_USER, env.POSTGRES_PASSWORD, env.POSTGRES_NAME, env.POSTGRES_PORT, env.POSTGRES_USE_SSL)
+	uri := fmt.Sprintf("host=%s user=%s password=%s dbname=%s port=%s sslmode=%s", env.POSTGRES_HOST, env.POSTGRES_USER, env.POSTGRES_PASSWORD, env.POSTGRES_DB, env.POSTGRES_PORT, env.POSTGRES_USE_SSL)
 	db, err := gorm.Open(postgres.Open(uri))
 	for i := 0; i < 5; i++ {
+		fmt.Println(uri)
 		if err == nil {
 			break
 		}
